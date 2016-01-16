@@ -39,10 +39,9 @@
     if(isset($_POST['lilypond_code'])) {
 
         $lilypond_code = 'language = "'.$_POST["language"].'"';
-
+        $lilypond_code .= 'songtitle = "'.$_POST["title"].'"';
+        $lilypond_code .= 'arranger = "'.$_POST["author"].'"';
         $lilypond_code .= <<<ABC
-songtitle = "Lille Peter Edderkop"
-arranger = "Andreas Larsen"
 music = {
   \key c \major
 
