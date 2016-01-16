@@ -23,7 +23,7 @@ determineAnimal =
                     ((4) (string-append "eps/G-" language "-color" dur-ext ".eps"))
                     ((5) (string-append "eps/A-" language "-color" dur-ext ".eps"))
                     ((6) (string-append "eps/H-" language "-color" dur-ext ".eps"))
-                    (else ".eps/Black.eps")))
+                    (else "eps/Black.eps")))
             (stl (grob-interpret-markup grob
                    #{ \markup {
                         \with-dimensions #'(0.15 . 1.05) #'(0 . 0)
@@ -47,14 +47,14 @@ determineGrey =
             (pch (ly:event-property (event-cause grob) 'pitch))
             (nnm (ly:pitch-notename pch))
             (file (case nnm
-                    ((0) (string-append ".eps/C-" language "-bw" dur-ext ".eps"))
-                    ((1) (string-append ".eps/D-" language "-bw" dur-ext ".eps"))
-                    ((2) (string-append ".eps/E-" language "-bw" dur-ext ".eps"))
-                    ((3) (string-append ".eps/F-" language "-bw" dur-ext ".eps"))
-                    ((4) (string-append ".eps/G-" language "-bw" dur-ext ".eps"))
-                    ((5) (string-append ".eps/A-" language "-bw" dur-ext ".eps"))
-                    ((6) (string-append ".eps/H-" language "-bw" dur-ext ".eps"))
-                    (else ".eps/Black.eps")))
+                    ((0) (string-append "eps/C-" language "-bw" dur-ext ".eps"))
+                    ((1) (string-append "eps/D-" language "-bw" dur-ext ".eps"))
+                    ((2) (string-append "eps/E-" language "-bw" dur-ext ".eps"))
+                    ((3) (string-append "eps/F-" language "-bw" dur-ext ".eps"))
+                    ((4) (string-append "eps/G-" language "-bw" dur-ext ".eps"))
+                    ((5) (string-append "eps/A-" language "-bw" dur-ext ".eps"))
+                    ((6) (string-append "eps/H-" language "-bw" dur-ext ".eps"))
+                    (else "eps/Black.eps")))
             (stl (grob-interpret-markup grob
                    #{ \markup {
                         \with-dimensions #'(0.15 . 1.05) #'(0 . 0)
@@ -79,7 +79,7 @@ determineBlack =
                    (else "-half")))
             (pch (ly:event-property (event-cause grob) 'pitch))
             (nnm (ly:pitch-notename pch))
-            (file (string-append ".eps/Black" dur-ext ".eps"))
+            (file (string-append "eps/Black" dur-ext ".eps"))
             (stl (grob-interpret-markup grob
                    #{ \markup {
                         \with-dimensions #'(0.15 . 1.05) #'(0 . 0)
@@ -92,14 +92,14 @@ determineBlack =
            (ly:stencil-scale stl mult mult))))
 
 
-langClef = #(string-append ".eps/G-clef-" language ".eps")
+langClef = #(string-append "eps/G-clef-" language ".eps")
 myClefSymbol = \markup{
   \lower #2.85
   \epsfile #Y #7.5 #langClef
 }
 defaultClefSymbol = \markup{
   \lower #2.85
-  \epsfile #Y #7.5 #".eps/G-clef-black.eps"
+  \epsfile #Y #7.5 #"eps/G-clef-black.eps"
 }
 
 animalNoteHeadsOn = {
