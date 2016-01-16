@@ -47,7 +47,7 @@ music = {
                 
 ABC;
         
-$lilipond_code .= $_POST['lilypond_code'];
+$lilypond_code .= $_POST['lilypond_code'];
 
 $lilypond_code .= <<<ABC
 \bar "|."

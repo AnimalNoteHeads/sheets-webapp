@@ -16,7 +16,7 @@ determineAnimal =
             (pch (ly:event-property (event-cause grob) 'pitch))
             (nnm (ly:pitch-notename pch))
             (file (case nnm
-                    ((0) (string-append "eps/C-" language "-color-half.eps"))
+                    ((0) (string-append "eps/C-" language "-color" dur-ext ".eps"))
                     ((1) (string-append "eps/D-" language "-color" dur-ext ".eps"))
                     ((2) (string-append "eps/E-" language "-color" dur-ext ".eps"))
                     ((3) (string-append "eps/F-" language "-color" dur-ext ".eps"))
