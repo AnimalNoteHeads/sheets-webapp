@@ -71,7 +71,7 @@ ABC;
     $pdf_filename_full = $ly_filename.".pdf";
     $pdf_path = CACHE_PATH."/".$pdf_filename_full;
     $pdf_path_full = CACHE_SERVER_PATH."/".$pdf_filename_full;
-    $pdf_link = "<a href'/".$pdf_path."'></a>";
+    $pdf_link = "<a href='/".$pdf_path."'>sheet</a>";
 
     $conversion_command = "lilypond -o"
             ." ".CACHE_SERVER_PATH."/"
