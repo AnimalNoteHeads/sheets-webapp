@@ -16,6 +16,17 @@
     // Check if the service has necessary data
     if(isset($_POST['lilypond_code'])) {
         $lilypond_code = $_POST['lilypond_code'];
+        
+//        $lilypond_code = "language = \"da\"\n"
+//                        ."songtitle = \"Lille Peter Edderkop\"\n"
+//                        ."arranger = \"Andreas Larsen\"\n"
+//                        ."music = {\n"
+//                        ."  \\key c \\major\n"
+//                        .$lilypond_code;
+//        $lilypond_code .= "\bar \"|.\"\n"
+//                        ."}\n\n"
+//                        ."\\include \".scripts/AnimalNoteHeads.ly\"";
+        
     } else {
         exit("Lilypond code was not found in the POST");
     }
