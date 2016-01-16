@@ -11,7 +11,7 @@
       (ly:context-pushpop-property context grob-name 'color color)
       (loop (cdr x)))))))
 
-% \include ".scripts/AnimalNoteHeads.ily"
+\include "/var/www/html/scripts/AnimalNoteHeads.ily"
 
 arranger = #(string-append "Arr.: " arranger)
 \header {
