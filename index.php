@@ -22,20 +22,20 @@ Converter from lilypond code to pdf: <br /><br />
 
     Song key:<br />
     <select name="key">
-      <option value="C" selected>C-major</option>
-      <option value="Cm">C-minor</option>
-      <option value="D">D-major</option>
-      <option value="Dm">D-minor</option>
-      <option value="E">E-major</option>
-      <option value="Em">E-minor</option>
-      <option value="F">F-major</option>
-      <option value="Fm">F-minor</option>
-      <option value="G">G-major</option>
-      <option value="Gm">G-minor</option>
-      <option value="A">A-major</option>
-      <option value="Am">A-minor</option>
-      <option value="B">B-major</option>
-      <option value="Bm">B-minor</option>
+      <option value="\key c \major" selected>C-major</option>
+      <option value="\key c \minor">C-minor</option>
+      <option value="\key d \major">D-major</option>
+      <option value="\key d \minor">D-minor</option>
+      <option value="\key e \major">E-major</option>
+      <option value="\key e \minor">E-minor</option>
+      <option value="\key f \major">F-major</option>
+      <option value="\key f \minor">F-minor</option>
+      <option value="\key g \major">G-major</option>
+      <option value="\key g \minor">G-minor</option>
+      <option value="\key a \major">A-major</option>
+      <option value="\key a \minor">A-minor</option>
+      <option value="\key b \major">B-major</option>
+      <option value="\key b \minor">B-minor</option>
     </select>
 
     <br /><br />
