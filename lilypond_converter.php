@@ -40,7 +40,7 @@
 
         $lilypond_code = 'language = "'.$_POST["language"].'"';
 
-        $lilypond_code = <<<ABC
+        $lilypond_code .= <<<ABC
 songtitle = "Lille Peter Edderkop"
 arranger = "Andreas Larsen"
 music = {
