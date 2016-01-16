@@ -16,24 +16,24 @@
     }
     
     // Initializing lilypond heads
-    function recurse_copy($src,$dst) { 
-        $dir = opendir($src); 
-        @mkdir($dst); 
-        while(false !== ( $file = readdir($dir)) ) { 
-            if (( $file != '.' ) && ( $file != '..' )) { 
-                if ( is_dir($src . '/' . $file) ) { 
-                    recurse_copy($src . '/' . $file,$dst . '/' . $file); 
-                } 
-                else { 
-                    copy($src . '/' . $file,$dst . '/' . $file); 
-                } 
-            } 
-        } 
-        closedir($dir); 
-    } 
-    if(!file_exists(LILYPOND_DATA_PATH."/eps")) {
-        recurse_copy("data/eps", LILYPOND_DATA_PATH."/eps");
-    }
+//    function recurse_copy($src,$dst) { 
+//        $dir = opendir($src); 
+//        @mkdir($dst); 
+//        while(false !== ( $file = readdir($dir)) ) { 
+//            if (( $file != '.' ) && ( $file != '..' )) { 
+//                if ( is_dir($src . '/' . $file) ) { 
+//                    recurse_copy($src . '/' . $file,$dst . '/' . $file); 
+//                } 
+//                else { 
+//                    copy($src . '/' . $file,$dst . '/' . $file); 
+//                } 
+//            } 
+//        } 
+//        closedir($dir); 
+//    } 
+//    if(!file_exists(LILYPOND_DATA_PATH."/eps")) {
+//        recurse_copy("data/eps", LILYPOND_DATA_PATH."/eps");
+//    }
 
     // Check if the service has necessary data
     if(isset($_POST['lilypond_code'])) {
