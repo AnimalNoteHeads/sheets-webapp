@@ -3,7 +3,8 @@
     // Initializing necessary constants
     const CACHE_FILE_LIFETIME = 60*60;
     const CACHE_PATH = "cache/conversions";
-    const CACHE_SERVER_PATH = "/var/www/html/".CACHE_PATH;
+    const SERVER_PATH = "/var/www/html";
+    const CACHE_SERVER_PATH = SERVER_PATH."/".CACHE_PATH;
     
     // Initial cache cleaner
     $files = scandir('folder/');
@@ -17,15 +18,15 @@
     if(isset($_POST['lilypond_code'])) {
         $lilypond_code = $_POST['lilypond_code'];
         
-//        $lilypond_code = "language = \"da\"\n"
-//                        ."songtitle = \"Lille Peter Edderkop\"\n"
-//                        ."arranger = \"Andreas Larsen\"\n"
-//                        ."music = {\n"
-//                        ."  \\key c \\major\n"
-//                        .$lilypond_code;
-//        $lilypond_code .= "\bar \"|.\"\n"
-//                        ."}\n\n"
-//                        ."\\include \".scripts/AnimalNoteHeads.ly\"";
+        $lilypond_code = "language = \"da\"\n"
+                        ."songtitle = \"Lille Peter Edderkop\"\n"
+                        ."arranger = \"Andreas Larsen\"\n"
+                        ."music = {\n"
+                        ."  \\key c \\major\n"
+                        .$lilypond_code;
+        $lilypond_code .= "\bar \"|.\"\n"
+                        ."}\n\n"
+                        ."\\include \"".SERVER_PATH."/scripts/AnimalNoteHeads.ly\"";
         
     } else {
         exit("Lilypond code was not found in the POST");
