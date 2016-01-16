@@ -38,8 +38,9 @@
     // Check if the service has necessary data
     if(isset($_POST['lilypond_code'])) {
 
-        $lilypond_code = <<<ABC
-language = "da"
+        $lilypond_code = $_POST["language"];
+
+        $lilypond_code .= <<<ABC
 songtitle = "Lille Peter Edderkop"
 arranger = "Andreas Larsen"
 music = {
