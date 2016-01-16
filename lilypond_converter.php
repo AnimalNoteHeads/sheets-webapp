@@ -75,7 +75,7 @@ ABC;
     $conversion_command = "lilypond -o"
             ." ".CACHE_SERVER_PATH."/"
             ." ".$ly_path_full;
-    echo shell_exec($conversion_command);
+    shell_exec($conversion_command);
     
-    //echo $pdf_path;
+    echo $pdf_path;
 ?>
