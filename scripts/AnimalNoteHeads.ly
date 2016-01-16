@@ -42,8 +42,8 @@ titlePageMarkup = \markup \abs-fontsize #10 \column {
   left-margin = 5\mm
   right-margin = 5\mm
 %  fonts = #(set-global-fonts
-            #:roman "Gidole-Regular"
-            #:factor (/ staff-height pt 20))
+%            #:roman "Gidole-Regular"
+%            #:factor (/ staff-height pt 20))
 }
 
 \pageBreak
@@ -52,7 +52,7 @@ titlePageMarkup = \markup \abs-fontsize #10 \column {
   \new Staff {
     \music
   }
-  \midi { \music }
+  \midi { }
   \layout {
     \omit Staff.TimeSignature
     \omit Score.BarNumber
