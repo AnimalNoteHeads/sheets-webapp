@@ -45,7 +45,7 @@ music = {
 \bar "|."
 }
 
-\include "/var/www/html/scripts/AnimalNoteHeads.ly"
+\include "/var/www/html/scripts/AnimalNoteHeadss.ly"
 ABC;
         
     } else {
