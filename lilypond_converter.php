@@ -38,11 +38,11 @@
     // Check if the service has necessary data
     if(isset($_POST['lilypond_code'])) {
 
-        $lilypond_code = 'language = "'.$_POST["language"].'"\n';
-        $lilypond_code .= 'songtitle = "'.$_POST["title"].'"\n';
-        $lilypond_code .= 'arranger = "'.$_POST["author"].'"\n';
-        $lilypond_code .= 'music = { '.$_POST["key"].'\n';
-        $lilypond_code .= $_POST['lilypond_code'];
+    $lilypond_code = 'language = "'.$_POST["language"].'"'.\n;
+    $lilypond_code .= 'songtitle = "'.$_POST["title"].'"'.\n;
+    $lilypond_code .= 'arranger = "'.$_POST["author"].'"'.\n;
+    $lilypond_code .= 'music = { '.$_POST["key"]\n;
+    $lilypond_code .= $_POST['lilypond_code'];
 $lilypond_code .= <<<ABC
 \bar "|."
 }
