@@ -1,6 +1,6 @@
 \version "2.18.2"
 
-#(set! paper-alist (cons '("snippet" . (cons ( 400 mm) ( 300 mm))) paper-alist))
+#(set! paper-alist (cons '("snippet" . (cons (* 400 mm) (* 300 mm))) paper-alist))
 \markup\vspace #.5
 #(set-global-staff-size 125)
 #(define (override-color-for-all-grobs color)
@@ -41,8 +41,8 @@ titlePageMarkup = \markup \abs-fontsize #10 \column {
   bottom-margin = 35\mm
   left-margin = 5\mm
   right-margin = 5\mm
-%  fonts = #(set-global-fonts
-%            #:roman "Gidole-Regular"
+% fonts = #(set-global-fonts
+%            #:roman "Gidole Regular"
 %            #:factor (/ staff-height pt 20))
 }
 
@@ -52,7 +52,7 @@ titlePageMarkup = \markup \abs-fontsize #10 \column {
   \new Staff {
     \music
   }
-  \midi { }
+ % \midi { }
   \layout {
     \omit Staff.TimeSignature
     \omit Score.BarNumber
