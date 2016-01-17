@@ -72,5 +72,6 @@ ABC;
             ." ".$ly_path_full;
     shell_exec($conversion_command);
 
-    echo $pdf_link;
+    header('Location: '.$pdf_path);
+    //echo $pdf_link;
 ?>
