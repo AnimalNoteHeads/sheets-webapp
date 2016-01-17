@@ -1,0 +1,433 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" [attr.width]="width * 2" [attr.height]="height * 2" [attr.viewBox]="'0 0 '+width+' '+height">
+  <style>
+    .line {
+      stroke: #333;
+      stroke-width: 0.3;
+    }
+    .stem {
+      stroke: #000;
+      stroke-width: 0.5;
+    }
+    .ignore {
+      pointer-events: none;
+    }
+    .new {
+      opacity: 0;
+      cursor: pointer;
+    }
+    .new.active {
+      opacity: 0.2;
+    }
+    .new:hover {
+      opacity: 1;
+    }
+    
+    .rhythm {
+      opacity: 0.2;
+      cursor: pointer;
+    }
+    .rhythm:hover,
+    .rhythm.active {
+      opacity: 1;
+    }
+    
+    .edit-note {
+      fill: black;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .edit-note:hover {
+      opacity: 0.03;
+    }
+    .rhythm-change {
+      font-family: Verdana;
+      font-size: 6;
+    }
+    
+    .editing-bg-primary {
+      fill: #40E0D0;
+      opacity: 0.1;
+    }
+    
+    .editing-bg-secondary {
+      fill: url(#editgrad);
+      opacity: 0.1;
+    }
+  </style>
+  <defs>
+    <linearGradient id="editgrad">
+      <stop offset="0%" stop-color="#40E0D0" />
+      <stop offset="100%" stop-color="transparent" />
+    </linearGradient>
+  </defs>
+  <symbol id="g-clef">
+    <g
+       transform="translate(2,10.5)"
+       clip-rule="evenodd"
+    >
+      <g transform="scale(0.175)">
+        <path d="M112.34 279.902c-4.478 2.844-9.76 4.594-15.094 4.594-18.694 0-29.836-13.556-29.836-29.962 0-23.99 21.523-36.88 42.933-36.88 33.5 0 59.657 26.755 59.657 59.787 0 40.55-34.988 64.71-73.966 64.71C47.097 342.147 10 306.812 10 261.51c0-48.014 35.648-74.096 62.652-95.644 28.515-22.754 66.896-52.685 66.896-100.374 0-21.47-8.75-41.382-23.963-55.492C93.918 25.714 80.5 50.632 80.5 82.932c0 12.798 1.915 25.708 4.133 38.365l44.43 253.468c1.127 6.426 2.123 12.663 2.123 19.037 0 27.13-19.964 46.198-46.56 46.198C60.016 440 42 423.413 42 403" fill="none" stroke-width="12" stroke="#000"/>
+        <path d="M65.853 376.5c16.282 0 28.5 11.36 28.5 26.5s-12.218 26.5-28.5 26.5c-16.283 0-28.5-11.36-28.5-26.5s12.217-26.5 28.5-26.5z" stroke-width="3" stroke="#000"/>
+      </g>
+    </g>
+  </symbol>
+  <symbol id="n4">
+    <g transform="translate(3.2,40)" fill-rule="evenodd">
+      <g transform="scale(0.175)">
+        <path d="M30 1.5c16.283 0 28.5 11.36 28.5 26.5S46.283 54.5 30 54.5 1.5 43.14 1.5 28 13.717 1.5 30 1.5z" stroke-width="3" stroke="#000"/>
+      </g>
+    </g>
+  </symbol>
+  <symbol id="n2">
+    <g transform="translate(3.2,40)" fill-rule="evenodd">
+      <g transform="scale(0.175)">
+        <path d="M30 1.5c16.283 0 28.5 11.36 28.5 26.5S46.283 54.5 30 54.5 1.5 43.14 1.5 28 13.717 1.5 30 1.5zm0 10c13.14 0 23 7.073 23 16.5s-9.86 16.5-23 16.5S7 37.427 7 28s9.86-16.5 23-16.5z" stroke-width="3" stroke="#000"/>
+      </g>
+   </g>
+  </symbol>
+  <symbol id="stem-up">
+    <line x1="13" y1="10" x2="13" y2="44" class="stem" />
+  </symbol>
+  <symbol id="stem-down">
+    <line x1="3.7" y1="78" x2="3.7" y2="44" class="stem" />
+  </symbol>
+  <symbol id="flag-down">
+    <g transform="translate(-78,238)">
+      <path
+         id="rect2169"
+         style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+         d="M 81.30272928873698,-159.18887 L 81.30272928873698,-163.7097 C 81.56313069661458,-164.11598 82.17077128092448,-164.64723 83.12911478678386,-165.30345 C 85.5040995279948,-166.41286 86.6915995279948,-167.51183 86.69161987304688,-168.60555 C 86.6915995279948,-169.91806 86.37562052408855,-170.95453 85.74022420247395,-171.72014 L 86.20550537109375,-172.47014 L 86.26800537109375,-172.47014 C 87.53882853190105,-170.97014 88.17770385742188,-169.08473 88.17772420247395,-166.80345 C 88.17770385742188,-164.64723 86.92770385742188,-163.02223 84.42772928873698,-161.92845 C 82.62563069661458,-160.9441 81.58396402994792,-160.03265 81.30272928873698,-159.18887 z " />
+    </g>
+  </symbol>
+  <symbol id="flag-up">
+    <g transform="translate(-68,-149)">
+      <path
+         id="rect2169"
+         style="color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
+         d="M 81.30272928873698,159.18887 L 81.30272928873698,163.7097 C 81.56313069661458,164.11598 82.17077128092448,164.64723 83.12911478678386,165.30345 C 85.5040995279948,166.41286 86.6915995279948,167.51183 86.69161987304688,168.60555 C 86.6915995279948,169.91806 86.37562052408855,170.95453 85.74022420247395,171.72014 L 86.20550537109375,172.47014 L 86.26800537109375,172.47014 C 87.53882853190105,170.97014 88.17770385742188,169.08473 88.17772420247395,166.80345 C 88.17770385742188,164.64723 86.92770385742188,163.02223 84.42772928873698,161.92845 C 82.62563069661458,160.9441 81.58396402994792,160.03265 81.30272928873698,159.18887 z " />
+    </g>
+  </symbol>
+  <symbol id="ledger">
+    <line x1="0" y1="45" x2="16.5" y2="45" class="line" />
+  </symbol>
+  <symbol id="r2">
+    <rect x="0" y="45.5" width="15" height="4" />
+  </symbol>
+  <symbol id="bar">
+    <rect x="4" y="30" width="2" height="40" />
+  </symbol>
+
+  <symbol id="r4">
+    <g transform="translate(-478.56752,-96.77905)">
+      <g
+        transform="matrix(1.8,0,0,1.8,-434.91385,4.5054224)"
+        style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10"
+      >
+        <path
+          d="M 512.254,71.019 C 512.117,71.077 512.035,71.277 512.098,71.417 C 512.117,71.437 512.316,71.675 512.516,71.937 C 512.973,72.452 513.051,72.574 513.152,72.812 C 513.551,73.628 513.332,74.667 512.633,75.324 C 512.574,75.402 512.316,75.62 512.074,75.8 C 511.379,76.398 511.059,76.738 510.941,77.038 C 510.898,77.117 510.898,77.195 510.898,77.316 C 510.879,77.593 510.898,77.617 511.719,78.57 C 512.832,79.906 513.629,80.843 513.691,80.902 L 513.75,80.96 L 513.672,80.921 C 512.574,80.464 511.34,80.245 510.922,80.445 C 510.781,80.503 510.699,80.585 510.641,80.722 C 510.48,81.062 510.523,81.562 510.762,82.296 C 510.98,82.956 511.418,83.831 511.855,84.488 C 512.035,84.769 512.375,85.206 512.414,85.226 C 512.473,85.285 512.555,85.265 512.613,85.226 C 512.672,85.148 512.672,85.085 512.555,84.949 C 512.137,84.351 511.938,83.113 512.176,82.456 C 512.273,82.16 512.395,81.999 512.613,81.898 C 513.191,81.64 514.469,81.96 515.004,82.495 C 515.043,82.535 515.125,82.617 515.164,82.636 C 515.305,82.695 515.504,82.617 515.563,82.476 C 515.645,82.335 515.602,82.238 515.422,82.019 C 515.086,81.62 514.07,80.425 513.93,80.245 C 513.57,79.827 513.41,79.429 513.371,78.929 C 513.352,78.292 513.609,77.617 514.09,77.175 C 514.148,77.097 514.406,76.878 514.645,76.699 C 515.383,76.081 515.684,75.742 515.801,75.421 C 515.883,75.163 515.844,74.925 515.664,74.706 C 515.602,74.648 514.906,73.788 514.09,72.812 C 512.973,71.499 512.574,71.019 512.516,70.999 C 512.434,70.98 512.336,70.98 512.254,71.019 z "
+          style="fill:#000000;stroke:#000000"
+        />
+      </g>
+    </g>
+  </symbol>
+  <symbol id="r8">
+    <g transform="translate(-10,29)">
+      <g
+         style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10"
+         transform="matrix(1.8,0,0,1.8,-936.4468999969,-121.3397373657)"
+      >
+        <path
+          style="fill:#000000;stroke:#000000"
+          d="m 531.098,74.847 c -0.52,0.098 -0.918,0.457 -1.098,0.953 -0.039,0.16 -0.039,0.199 -0.039,0.418 0,0.301 0.019,0.461 0.16,0.699 0.199,0.399 0.617,0.719 1.094,0.836 0.5,0.141 1.336,0.02 2.293,-0.297 l 0.238,-0.082 -1.176,3.25 -1.156,3.246 c 0,0 0.039,0.02 0.102,0.063 0.117,0.078 0.316,0.137 0.457,0.137 0.238,0 0.539,-0.137 0.578,-0.258 0,-0.039 0.558,-1.934 1.234,-4.184 l 1.195,-4.125 -0.039,-0.058 c -0.097,-0.121 -0.296,-0.16 -0.418,-0.063 -0.039,0.039 -0.101,0.121 -0.14,0.18 -0.18,0.301 -0.637,0.836 -0.875,1.035 -0.219,0.18 -0.34,0.199 -0.539,0.121 -0.18,-0.098 -0.239,-0.199 -0.36,-0.738 -0.117,-0.535 -0.257,-0.778 -0.558,-0.977 -0.278,-0.179 -0.637,-0.238 -0.953,-0.156 z"
+        />
+      </g>
+    </g>
+  </symbol>
+  
+  <symbol id="d2">
+    <text class="rhythm-change" x="0" y="7">½</text>
+  </symbol>
+  
+  <symbol id="d4">
+    <text class="rhythm-change" x="0" y="7">¼</text>
+  </symbol>
+ 
+  <symbol id="d8">
+    <text class="rhythm-change" x="0" y="7">⅛</text>
+  </symbol>
+  
+  <symbol id="sharp">
+    <g transform="translate(0,19)">
+      <g transform="scale(7)">
+        <path
+          transform="matrix(0.004,0,0,-0.004,0,1.5)"
+          d="m 216,-312 c 0,-10 -8,-19 -18,-19 -10,0 -19,9 -19,19 v 145 l -83,-31 v -158 c 0,-10 -9,-19 -19,-19 -10,0 -18,9 -18,19 v 145 l -32,-12 c -2,-1 -5,-1 -7,-1 -11,0 -20,9 -20,20 v 60 c 0,8 5,16 13,19 l 46,16 V 51 L 27,40 C 25,39 22,39 20,39 9,39 0,48 0,59 v 60 c 0,8 5,15 13,18 l 46,17 v 158 c 0,10 8,19 18,19 10,0 19,-9 19,-19 V 167 l 83,31 v 158 c 0,10 9,19 19,19 10,0 18,-9 18,-19 V 211 l 32,12 c 2,1 5,1 7,1 11,0 20,-9 20,-20 v -60 c 0,-8 -5,-16 -13,-19 L 216,109 V -51 l 32,11 c 2,1 5,1 7,1 11,0 20,-9 20,-20 v -60 c 0,-8 -5,-15 -13,-18 l -46,-17 V -312 z M 96,65 V -95 l 83,30 V 95 z"
+        />
+      </g>
+    </g>
+  </symbol>
+  <symbol id="flat">
+    <g transform="translate(0,17)">
+      <g transform="scale(7)">
+        <path
+          transform="matrix(0.004,0,0,-0.004,0.108,1.86)"
+          d="m 27,41 -1,-66 v -11 c 0,-22 1,-44 4,-66 45,38 93,80 93,139 0,33 -14,67 -43,67 C 49,104 28,74 27,41 z m -42,-179 -12,595 c 8,5 18,8 27,8 9,0 19,-3 27,-8 L 20,112 c 25,21 58,34 91,34 52,0 89,-48 89,-102 0,-80 -86,-117 -147,-169 -15,-13 -24,-38 -45,-38 -13,0 -23,11 -23,25 z"
+        />
+      </g>
+    </g>
+  </symbol>
+  
+  <g *ngFor="#stave of staves, #i=index" [attr.transform]="'translate(0,'+(i * 120 + 15)+')'">
+    
+    <line x1="0" x2="496" y1="30" y2="30" class="line" />
+    <line x1="0" x2="496" y1="40" y2="40" class="line" />
+    <line x1="0" x2="496" y1="50" y2="50" class="line" />
+    <line x1="0" x2="496" y1="60" y2="60" class="line" />
+    <line x1="0" x2="496" y1="70" y2="70" class="line" />
+    
+    <g class="clef" transform="translate(0,0)">
+      <use xlink:href="#g-clef" />
+    </g>
+    
+    <g *ngFor="#num of sharps, #i=index" [attr.transform]="'translate('+(35+i*6)+','+(num*5)+')'">
+      <use xlink:href="#sharp" />
+    </g>
+    
+    <g *ngFor="#num of flats, #i=index" [attr.transform]="'translate('+(35+i*6)+','+(num*5)+')'">
+      <use xlink:href="#flat" />
+    </g>
+    
+    <g *ngFor="#note of stave" [attr.transform]="'translate('+(70+note.position)+',0)'">
+    
+      <use xlink:href="#bar" *ngIf="note.value === '|'"/>
+      
+      <g *ngIf="note.value !== '|'">
+      
+        <g *ngIf="!note.editing">
+          <use xlink:href="#r2" *ngIf="note.value+note.rhythm === 'r2'"/>
+          <use xlink:href="#r4" *ngIf="note.value+note.rhythm === 'r4'"/>
+          <use xlink:href="#r8" *ngIf="note.value+note.rhythm === 'r8'"/>
+          
+          <g *ngIf="note.isReal()" [attr.transform]="'translate(0,'+note.getHeight()+')'">
+            <g class="ledger" *ngFor="#ledger of note.getLedgers()" [attr.transform]="'translate(0,'+ledger+')'"><use xlink:href="#ledger" /></g>
+              
+            <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+            <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+            <use xlink:href="#flag-up" *ngIf="note.isUp() && note.rhythm === Note.RHYTHM_EIGHTH" />
+            <use xlink:href="#stem-up" *ngIf="note.isUp()" />
+            <use xlink:href="#flag-down" *ngIf="!note.isUp() && note.rhythm === Note.RHYTHM_EIGHTH" />
+            <use xlink:href="#stem-down" *ngIf="!note.isUp()" />
+          </g>
+          
+          <rect x="0" y="-15" [attr.width]="note.getLength()" height="120" class="edit-note" (click)="note.edit()" />
+        </g>
+        
+        <g *ngIf="note.editing">
+          <rect x="0" y="-15" width="25" height="120" class="editing-bg-primary" />
+          <rect x="25" y="-15" [attr.width]="note.getLength()-25" height="120" class="editing-bg-secondary" />
+        
+          <g transform="translate(0,-15)">
+            <g transform="translate(0, 0)" class="rhythm" [class.active]="note.rhythm === Note.RHYTHM_HALF" (click)="setRhythm(note,Note.RHYTHM_HALF)">
+              <use xlink:href="#d2" />
+            </g>
+            <g transform="translate(8, 0)" class="rhythm" [class.active]="note.rhythm === Note.RHYTHM_QUARTER" (click)="setRhythm(note,Note.RHYTHM_QUARTER)">
+              <use xlink:href="#d4" />
+            </g>
+            <g transform="translate(16, 0)" class="rhythm" [class.active]="note.rhythm === Note.RHYTHM_EIGHTH" (click)="setRhythm(note,Note.RHYTHM_EIGHTH)">
+              <use xlink:href="#d8" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,-35)" class="new" [class.active]="note.value === &quot;c'''&quot;">
+            <rect x="0" width="25" y="42.5" height="5" fill="transparent" (click)="setValue(note, &quot;c'''&quot;)" />
+            <g class="ignore">
+              <g class="ledger" transform="translate(0,0)" ><use xlink:href="#ledger" /></g>
+              <g class="ledger" transform="translate(0,10)"><use xlink:href="#ledger" /></g>
+              <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+              <use xlink:href="#flag-down" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH"  />
+              <use xlink:href="#stem-down" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,-30)" class="new" [class.active]="note.value === &quot;b''&quot;">
+            <rect x="0" width="25" y="42.5" height="5" fill="transparent" (click)="setValue(note, &quot;b''&quot;)" />
+            <g class="ignore">
+              <g class="ledger" transform="translate(0,5)" ><use xlink:href="#ledger" /></g>
+              <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+              <use xlink:href="#flag-down" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH"  />
+              <use xlink:href="#stem-down" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,-25)" class="new" [class.active]="note.value === &quot;a''&quot;">
+            <rect x="0" width="25" y="42.5" height="5" fill="transparent" (click)="setValue(note, &quot;a''&quot;)" />
+            <g class="ignore">
+              <g class="ledger" transform="translate(0,0)"><use xlink:href="#ledger" /></g>
+              <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+              <use xlink:href="#flag-down" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH"  />
+              <use xlink:href="#stem-down" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,-20)" class="new" [class.active]="note.value === &quot;g''&quot;">
+            <rect x="0" width="25" y="42.5" height="5" fill="transparent" (click)="setValue(note, &quot;g''&quot;)" />
+            <g class="ignore">
+              <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+              <use xlink:href="#flag-down" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH"  />
+              <use xlink:href="#stem-down" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,-15)" class="new" [class.active]="note.value === &quot;f''&quot;">
+            <rect x="0" width="25" y="42.5" height="5" fill="transparent" (click)="setValue(note, &quot;f''&quot;)" />
+            <g class="ignore">
+              <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+              <use xlink:href="#flag-down" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH"  />
+              <use xlink:href="#stem-down" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,-10)" class="new" [class.active]="note.value === &quot;e''&quot;">
+            <rect x="0" width="25" y="42.5" height="5" fill="transparent" (click)="setValue(note, &quot;e''&quot;)" />
+            <g class="ignore">
+              <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+              <use xlink:href="#flag-down" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH"  />
+              <use xlink:href="#stem-down" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,-5)" class="new" [class.active]="note.value === &quot;d''&quot;">
+            <rect x="0" width="25" y="42.5" height="5" fill="transparent" (click)="setValue(note, &quot;d''&quot;)" />
+            <g class="ignore">
+              <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+              <use xlink:href="#flag-down" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH"  />
+              <use xlink:href="#stem-down" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,0)" class="new" [class.active]="note.value === &quot;c''&quot;">
+            <rect x="0" width="25" y="42.5" height="5" fill="transparent" (click)="setValue(note, &quot;c''&quot;)" />
+            <g class="ignore">
+              <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+              <use xlink:href="#flag-down" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH"  />
+              <use xlink:href="#stem-down" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,5)" class="new" [class.active]="note.value === &quot;b'&quot;">
+            <rect x="0" width="25" y="42.5" height="5" fill="transparent" (click)="setValue(note, &quot;b'&quot;)" />
+            <g class="ignore">
+              <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+              <use xlink:href="#flag-up" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH"  />
+              <use xlink:href="#stem-up" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,10)" class="new" [class.active]="note.value === &quot;a'&quot;">
+            <rect x="0" width="25" y="42.5" height="5" fill="transparent" (click)="setValue(note, &quot;a'&quot;)" />
+            <g class="ignore">
+              <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+              <use xlink:href="#flag-up" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH"  />
+              <use xlink:href="#stem-up" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,15)" class="new" [class.active]="note.value === &quot;g'&quot;">
+            <rect x="0" width="25" y="42.5" height="5" fill="transparent" (click)="setValue(note, &quot;g'&quot;)" />
+            <g class="ignore">
+              <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+              <use xlink:href="#flag-up" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH"  />
+              <use xlink:href="#stem-up" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,20)" class="new" [class.active]="note.value === &quot;f'&quot;">
+            <rect x="0" width="25" y="42.5" height="5" fill="transparent" (click)="setValue(note, &quot;f'&quot;)" />
+            <g class="ignore">
+              <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+              <use xlink:href="#flag-up" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH"  />
+              <use xlink:href="#stem-up" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,25)" class="new" [class.active]="note.value === &quot;e'&quot;">
+            <rect x="0" width="25" y="42.5" height="5" fill="transparent" (click)="setValue(note, &quot;e'&quot;)" />
+            <g class="ignore">
+              <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+              <use xlink:href="#flag-up" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH"  />
+              <use xlink:href="#stem-up" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,30)" class="new" [class.active]="note.value === &quot;d'&quot;">
+            <rect x="0" width="25" y="42.5" height="5" fill="transparent" (click)="setValue(note, &quot;d'&quot;)" />
+            <g class="ignore">
+              <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+              <use xlink:href="#flag-up" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH"  />
+              <use xlink:href="#stem-up" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,35)" class="new" [class.active]="note.value === &quot;c'&quot;">
+            <rect x="0" width="25" y="42.5" height="5" fill="transparent" (click)="setValue(note, &quot;c'&quot;)" />
+            <g class="ignore">
+              <g class="ledger" transform="translate(0,0)"><use xlink:href="#ledger" /></g>
+              <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+              <use xlink:href="#flag-up" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH"  />
+              <use xlink:href="#stem-up" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,40)" class="new" [class.active]="note.value === &quot;b&quot;">
+            <rect x="0" width="25" y="42.5" height="5" fill="transparent" (click)="setValue(note, &quot;b&quot;)" />
+            <g class="ignore">
+              <g class="ledger" transform="translate(0,-5)"><use xlink:href="#ledger" /></g>
+              <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+              <use xlink:href="#flag-up" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH"  />
+              <use xlink:href="#stem-up" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,45)" class="new" [class.active]="note.value === &quot;a&quot;">
+            <rect x="0" width="25" y="42.5" height="5" fill="transparent" (click)="setValue(note, &quot;a&quot;)" />
+            <g class="ignore">
+              <g class="ledger" transform="translate(0,-10)"><use xlink:href="#ledger" /></g>
+              <g class="ledger" transform="translate(0,0)"><use xlink:href="#ledger" /></g>
+              <use xlink:href="#n2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#n4" *ngIf="note.rhythm !== Note.RHYTHM_HALF" />
+              <use xlink:href="#flag-up" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH"  />
+              <use xlink:href="#stem-up" />
+            </g>
+          </g>
+          
+          <g transform="translate(0,0)" class="new" [class.active]="note.value === &quot;r&quot;">
+            <rect x="0" width="25" y="92.5" height="12.5" fill="transparent" (click)="setValue(note, &quot;r&quot;)"  />
+            <g class="ignore">
+              <use xlink:href="#r2" *ngIf="note.rhythm === Note.RHYTHM_HALF" />
+              <use xlink:href="#r4" *ngIf="note.rhythm === Note.RHYTHM_QUARTER" />
+              <use xlink:href="#r8" *ngIf="note.rhythm === Note.RHYTHM_EIGHTH" />
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+  
+  
+</svg>

@@ -1,0 +1,20 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #f7f7f7;
+}
+
+.wrapper {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 1em 2em;
+  max-width: 1050px;
+  min-height: 100%;
+  margin: 0 auto;
+}
+
+textarea {
+  resize: none;
+  width: 1000px;
+  height: 200px;
+}
